@@ -1,10 +1,21 @@
 # DeepSeek Harness for VS Code
 
+[![CI](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/lonelymoon87/dsh-vscode)](https://github.com/lonelymoon87/dsh-vscode/releases/latest)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.100%2B-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
+[![License](https://img.shields.io/github/license/lonelymoon87/dsh-vscode)](./LICENSE)
+
 English | [中文](README.zh-CN.md)
 
 An independent, pre-release VS Code client for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It opens an official SDK runtime in the current workspace, streams the durable session log into a sidebar, shows tool activity, and opens file-tool results in VS Code's native diff editor.
 
 This community project is not maintained or endorsed by DeepSeek.
+
+## Real model demonstration
+
+![DeepSeek Harness VS Code real API demo](https://github.com/lonelymoon87/dsh-vscode/blob/vscode-mvp-assets/dsh-vscode-real-api.gif?raw=true)
+
+The recording uses the released extension architecture, official VS Code 1.133.0 arm64, the bundled official DSH SDK runtime, `deepseek-official` / `deepseek-v4-flash`, and a real `bash` tool call. No fixture or mock transport is involved.
 
 ## Features
 
@@ -26,9 +37,10 @@ On macOS, a VS Code process started from the Dock may not inherit shell variable
 
 ## Install
 
-Download the VSIX for your operating system and CPU from the latest GitHub Release, then run:
+Download and install the tested macOS arm64 VSIX:
 
 ```sh
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.0/dsh-vscode-darwin-arm64-0.1.0.vsix
 code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
 ```
 
@@ -75,3 +87,10 @@ The current SDK wire has no server-to-client approval request or client approval
 `pnpm run test` covers notification projection and the official SDK against a real scripted JSON-RPC subprocess. `pnpm run package` builds a VSIX. Product-visible pull requests must include a GIF captured from the branch's real extension, runtime, and model flow; fixtures are test inputs, not release evidence.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+
+## Release evidence
+
+- `pnpm run check` covers type checking, unit tests, linting, and VSIX packaging.
+- CI runs on Node 22.19 and Node 24.
+- The v0.1.0 VSIX was installed into a fresh official VS Code profile and completed a real model round, tool card, and token-usage projection.
+- Bugs and compatibility reports are tracked in [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues).
