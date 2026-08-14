@@ -37,21 +37,21 @@
 
 ## 安装
 
-下载并安装已经验证的 macOS arm64 VSIX：
+下载并安装已经验证的 macOS arm64 VSIX。
 
 ```sh
-curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.0/dsh-vscode-darwin-arm64-0.1.0.vsix
-code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.1/dsh-vscode-darwin-arm64-0.1.1.vsix
+code --install-extension dsh-vscode-darwin-arm64-0.1.1.vsix
 ```
 
-首个版本目前只提供已经验证的 macOS arm64 构建，其他平台的构建仍待补齐。
+首个版本只提供经过验证的 macOS arm64 构建，其他平台尚未提供。
 
-也可以从源码构建：
+也可以从源码构建。
 
 ```sh
 pnpm install
 pnpm run check
-code --install-extension dsh-vscode-*-0.1.0.vsix
+code --install-extension dsh-vscode-*-0.1.1.vsix
 ```
 
 打开 Activity Bar 中的 **DeepSeek Harness** 视图并输入提示词。也可以用 `Cmd+Enter` 或 `Ctrl+Enter` 发送。
@@ -90,7 +90,7 @@ code --install-extension dsh-vscode-*-0.1.0.vsix
 
 ## 发布验证
 
-- `pnpm run check` 覆盖类型检查、单元测试、lint 和 VSIX 打包；
+- `pnpm run check` 覆盖类型检查、单元测试、生产构建和 VSIX 打包；
 - CI 在 Node 22.19 与 Node 24 上运行；
-- v0.1.0 VSIX 已装入全新的官方 VS Code profile，并完成真实模型回复、工具卡片和 token 用量投影；
+- v0.1.1 VSIX 已装入全新的官方 VS Code profile，并完成真实模型回复、工具卡片和 token 用量投影；
 - bug 与兼容性问题统一进入 [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues)。
