@@ -1,10 +1,21 @@
 # DeepSeek Harness for VS Code
 
+[![CI](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/lonelymoon87/dsh-vscode)](https://github.com/lonelymoon87/dsh-vscode/releases/latest)
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.100%2B-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
+[![License](https://img.shields.io/github/license/lonelymoon87/dsh-vscode)](./LICENSE)
+
 [English](README.md) | 中文
 
 这是一个独立开发、仍处于预发布阶段的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) VS Code 客户端。扩展会在当前工作区启动官方 SDK runtime，把持久化会话日志流式投影到侧栏，展示工具执行过程，并用 VS Code 原生 diff 编辑器打开文件工具的结果。
 
 本项目是社区项目，不由 DeepSeek 维护或背书。
+
+## 真实模型演示
+
+![DeepSeek Harness VS Code 真实 API 演示](https://github.com/lonelymoon87/dsh-vscode/blob/vscode-mvp-assets/dsh-vscode-real-api.gif?raw=true)
+
+录屏使用发布版扩展架构、官方 VS Code 1.133.0 arm64、扩展内置的官方 DSH SDK runtime、`deepseek-official` / `deepseek-v4-flash`，并完成了一次真实 `bash` 工具调用；没有使用 fixture 或 mock transport。
 
 ## 功能
 
@@ -26,9 +37,10 @@
 
 ## 安装
 
-从最新 GitHub Release 下载与操作系统、CPU 匹配的 VSIX，然后执行：
+下载并安装已经验证的 macOS arm64 VSIX：
 
 ```sh
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.0/dsh-vscode-darwin-arm64-0.1.0.vsix
 code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
 ```
 
@@ -75,3 +87,10 @@ code --install-extension dsh-vscode-*-0.1.0.vsix
 `pnpm run test` 覆盖事件投影，并让官方 SDK 对真实脚本化 JSON-RPC 子进程完成协议测试。`pnpm run package` 生成 VSIX。任何用户可见的 Pull Request 都必须附带从该分支真实扩展、runtime 和模型流程录制的 GIF；测试 fixture 不能代替发布证据。
 
 贡献与安全报告方式见 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。
+
+## 发布验证
+
+- `pnpm run check` 覆盖类型检查、单元测试、lint 和 VSIX 打包；
+- CI 在 Node 22.19 与 Node 24 上运行；
+- v0.1.0 VSIX 已装入全新的官方 VS Code profile，并完成真实模型回复、工具卡片和 token 用量投影；
+- bug 与兼容性问题统一进入 [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues)。
