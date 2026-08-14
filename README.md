@@ -40,18 +40,18 @@ On macOS, a VS Code process started from the Dock may not inherit shell variable
 Download and install the tested macOS arm64 VSIX:
 
 ```sh
-curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.0/dsh-vscode-darwin-arm64-0.1.0.vsix
-code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.1/dsh-vscode-darwin-arm64-0.1.1.vsix
+code --install-extension dsh-vscode-darwin-arm64-0.1.1.vsix
 ```
 
-The first release currently provides the tested macOS arm64 build. Builds for other platforms remain pending.
+The first release provides a tested macOS arm64 build only. Other platforms are not yet available.
 
 To build the extension from source instead:
 
 ```sh
 pnpm install
 pnpm run check
-code --install-extension dsh-vscode-*-0.1.0.vsix
+code --install-extension dsh-vscode-*-0.1.1.vsix
 ```
 
 Open the **DeepSeek Harness** Activity Bar view and submit a prompt. `Cmd+Enter` or `Ctrl+Enter` also sends the prompt.
@@ -90,7 +90,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 
 ## Release evidence
 
-- `pnpm run check` covers type checking, unit tests, linting, and VSIX packaging.
+- `pnpm run check` covers type checking, unit tests, production build, and VSIX packaging.
 - CI runs on Node 22.19 and Node 24.
-- The v0.1.0 VSIX was installed into a fresh official VS Code profile and completed a real model round, tool card, and token-usage projection.
+- The v0.1.1 VSIX was installed into a fresh official VS Code profile and completed a real model round, tool card, and token-usage projection.
 - Bugs and compatibility reports are tracked in [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues).
