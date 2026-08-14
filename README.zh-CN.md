@@ -24,7 +24,17 @@
 
 在 macOS 上，从 Dock 启动的 VS Code 可能拿不到 shell 环境变量。开发阶段最简单的方式是在已配置密钥的终端里运行 `code .`。
 
-## 从源码安装
+## 安装
+
+从最新 GitHub Release 下载与操作系统、CPU 匹配的 VSIX，然后执行：
+
+```sh
+code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
+```
+
+首个版本目前只提供已经验证的 macOS arm64 构建，其他平台的构建仍待补齐。
+
+也可以从源码构建：
 
 ```sh
 pnpm install
@@ -58,7 +68,7 @@ code --install-extension dsh-vscode-*-0.1.0.vsix
 - rc.6 SDK 协议尚未提供中途取消、审批 UI、会话列表和会话恢复。
 - 同一时间只展示一个根会话和一个工作区文件夹，子 agent 通知不会混入根会话记录。
 - Markdown、图片附件和非 diff 的结构化工具展示目前会退化为纯文本。
-- 尚未开始 Marketplace 发布和签名发行。
+- VS Marketplace 发布和签名发行仍待完成；GitHub Release 中的 VSIX 是未签名的社区构建。
 
 ## 开发
 

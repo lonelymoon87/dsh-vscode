@@ -24,7 +24,17 @@ This community project is not maintained or endorsed by DeepSeek.
 
 On macOS, a VS Code process started from the Dock may not inherit shell variables. Launching `code .` from a configured shell is the simplest development setup.
 
-## Install from source
+## Install
+
+Download the VSIX for your operating system and CPU from the latest GitHub Release, then run:
+
+```sh
+code --install-extension dsh-vscode-darwin-arm64-0.1.0.vsix
+```
+
+The first release currently provides the tested macOS arm64 build. Builds for other platforms remain pending.
+
+To build the extension from source instead:
 
 ```sh
 pnpm install
@@ -58,7 +68,7 @@ The current SDK wire has no server-to-client approval request or client approval
 - No mid-turn cancel, approval UI, session list, or session resume because the rc.6 SDK protocol does not expose those operations.
 - One active root session and one workspace folder are shown at a time; descendant notifications are not mixed into the root transcript.
 - Markdown, image attachments, and structured non-diff tool presentations fall back to plain text.
-- Marketplace publication and signed release artifacts have not started.
+- VS Marketplace publication and signed release artifacts remain pending; GitHub Release VSIX files are unsigned community builds.
 
 ## Development
 
