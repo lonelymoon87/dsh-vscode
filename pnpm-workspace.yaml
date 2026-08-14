@@ -1,0 +1,17 @@
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@deepseek-ai/*'
+
+injectWorkspacePackages: true
+
+allowBuilds:
+  '@deepseek-ai/dsh-subprocess-local': true
+  '@vscode/vsce-sign': false
+  esbuild: true
+  keytar: false
+  koffi: true
+  node-pty: true
+
+packages:
+  - .
+  - runtime/launcher

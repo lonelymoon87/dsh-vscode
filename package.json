@@ -1,0 +1,126 @@
+{
+  "name": "dsh-vscode",
+  "displayName": "DeepSeek Harness",
+  "description": "Run DeepSeek Harness sessions from a VS Code sidebar.",
+  "version": "0.1.0",
+  "type": "module",
+  "publisher": "lonelymoon87",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lonelymoon87/dsh-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lonelymoon87/dsh-vscode/issues"
+  },
+  "homepage": "https://github.com/lonelymoon87/dsh-vscode#readme",
+  "engines": {
+    "vscode": "^1.100.0",
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "categories": ["Machine Learning", "Other"],
+  "keywords": ["deepseek", "agent", "coding assistant", "deepseek harness"],
+  "main": "./dist/extension.cjs",
+  "extensionKind": ["workspace"],
+  "capabilities": {
+    "untrustedWorkspaces": { "supported": false },
+    "virtualWorkspaces": { "supported": false }
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "deepseekHarness",
+          "title": "DeepSeek Harness",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "deepseekHarness": [
+        {
+          "type": "webview",
+          "id": "deepseekHarness.chat",
+          "name": "Agent"
+        }
+      ]
+    },
+    "commands": [
+      { "command": "deepseekHarness.newSession", "title": "DeepSeek Harness: New Session", "icon": "$(add)" },
+      { "command": "deepseekHarness.restartRuntime", "title": "DeepSeek Harness: Restart Runtime", "icon": "$(debug-restart)" },
+      { "command": "deepseekHarness.showLogs", "title": "DeepSeek Harness: Show Logs", "icon": "$(output)" }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "deepseekHarness.newSession", "when": "view == deepseekHarness.chat", "group": "navigation@1" },
+        { "command": "deepseekHarness.restartRuntime", "when": "view == deepseekHarness.chat", "group": "navigation@2" },
+        { "command": "deepseekHarness.showLogs", "when": "view == deepseekHarness.chat", "group": "navigation@3" }
+      ]
+    },
+    "configuration": {
+      "title": "DeepSeek Harness",
+      "properties": {
+        "deepseekHarness.nodePath": {
+          "type": "string",
+          "default": "node",
+          "description": "Node.js 22.19+ executable used for the bundled runtime. Set an absolute path when the editor does not inherit shell PATH."
+        },
+        "deepseekHarness.runtimeCommand": {
+          "type": "string",
+          "default": "",
+          "description": "Optional external dsh-jsonrpc-agent executable. A non-empty value replaces nodePath and the bundled runtime entrypoint."
+        },
+        "deepseekHarness.runtimeArgs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Arguments appended to the resolved runtime executable. The extension passes its Cordis config through DSH_CORDIS_CONFIG."
+        },
+        "deepseekHarness.provider": {
+          "type": "string",
+          "default": "deepseek-official",
+          "description": "Provider route sent during the SDK initialize handshake."
+        },
+        "deepseekHarness.model": {
+          "type": "string",
+          "default": "deepseek-v4-flash",
+          "description": "Model id sent during the SDK initialize handshake."
+        },
+        "deepseekHarness.maxTokens": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 49152,
+          "description": "Maximum output tokens for each root-agent model request."
+        }
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "media",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "package": "node scripts/package.mjs",
+    "check": "pnpm run typecheck && pnpm run test && pnpm run build && pnpm run package"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-sdk-client": "0.1.0-rc.6",
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.100.0",
+    "@vitest/coverage-v8": "^4.1.8",
+    "@vscode/vsce": "^3.6.0",
+    "esbuild": "^0.27.0",
+    "typescript": "^6.0.0",
+    "vitest": "^4.1.8"
+  },
+  "packageManager": "pnpm@11.7.0"
+}
