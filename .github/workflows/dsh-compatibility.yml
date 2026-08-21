@@ -1,0 +1,44 @@
+name: DSH compatibility
+
+on:
+  pull_request:
+  schedule:
+    - cron: '51 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  next-runtime:
+    name: DSH next SDK and runtime
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Resolve official DSH packages from the next tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs'
+
+          for (const file of ['package.json', 'runtime/launcher/package.json']) {
+            const manifest = JSON.parse(readFileSync(file, 'utf8'))
+            for (const field of ['dependencies', 'devDependencies']) {
+              for (const name of Object.keys(manifest[field] ?? {})) {
+                if (name.startsWith('@deepseek-ai/dsh-')) manifest[field][name] = 'next'
+              }
+            }
+            writeFileSync(file, `${JSON.stringify(manifest, null, 2)}\n`)
+          }
+          NODE
+          pnpm install --no-frozen-lockfile
+      - run: pnpm run check

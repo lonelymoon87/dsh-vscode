@@ -1,13 +1,14 @@
 # DeepSeek Harness for VS Code
 
 [![CI](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml)
+[![DSH compatibility](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/dsh-compatibility.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/dsh-compatibility.yml)
 [![Release](https://img.shields.io/github/v/release/lonelymoon87/dsh-vscode)](https://github.com/lonelymoon87/dsh-vscode/releases/latest)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.100%2B-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
 [![License](https://img.shields.io/github/license/lonelymoon87/dsh-vscode)](./LICENSE)
 
 English | [中文](README.zh-CN.md)
 
-An independent, pre-release VS Code client for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). It opens an official SDK runtime in the current workspace, streams the durable session log into a sidebar, shows tool activity, and opens file-tool results in VS Code's native diff editor.
+An independent, pre-release VS Code client for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Version 0.1.2 embeds the official 0.1.1-rc.1 SDK runtime, streams the durable session log into a sidebar, shows tool activity, and opens file-tool results in VS Code's native diff editor.
 
 This community project is not maintained or endorsed by DeepSeek.
 
@@ -40,8 +41,8 @@ On macOS, a VS Code process started from the Dock may not inherit shell variable
 Download and install the tested macOS arm64 VSIX:
 
 ```sh
-curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.1/dsh-vscode-darwin-arm64-0.1.1.vsix
-code --install-extension dsh-vscode-darwin-arm64-0.1.1.vsix
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.2/dsh-vscode-darwin-arm64-0.1.2.vsix
+code --install-extension dsh-vscode-darwin-arm64-0.1.2.vsix
 ```
 
 The first release provides a tested macOS arm64 build only. Other platforms are not yet available.
@@ -51,7 +52,7 @@ To build the extension from source instead:
 ```sh
 pnpm install
 pnpm run check
-code --install-extension dsh-vscode-*-0.1.1.vsix
+code --install-extension dsh-vscode-*-0.1.2.vsix
 ```
 
 Open the **DeepSeek Harness** Activity Bar view and submit a prompt. `Cmd+Enter` or `Ctrl+Enter` also sends the prompt.
@@ -77,7 +78,7 @@ The current SDK wire has no server-to-client approval request or client approval
 
 ## Known limitations
 
-- No mid-turn cancel, approval UI, session list, or session resume because the rc.6 SDK protocol does not expose those operations.
+- No mid-turn cancel, approval UI, session list, or session resume because the 0.1.1-rc.1 SDK protocol does not expose those operations.
 - One active root session and one workspace folder are shown at a time; descendant notifications are not mixed into the root transcript.
 - Markdown, image attachments, and structured non-diff tool presentations fall back to plain text.
 - VS Marketplace publication and signed release artifacts remain pending; GitHub Release VSIX files are unsigned community builds.
@@ -92,5 +93,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
 
 - `pnpm run check` covers type checking, unit tests, production build, and VSIX packaging.
 - CI runs on Node 22.19 and Node 24.
-- The v0.1.1 VSIX was installed into a fresh official VS Code profile and completed a real model round, tool card, and token-usage projection.
+- The bundled 0.1.1-rc.1 runtime completes its real SDK initialize and shutdown handshake; the v0.1.2 VSIX remains macOS arm64 until platform release automation is added.
 - Bugs and compatibility reports are tracked in [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues).
