@@ -2,7 +2,7 @@
   "name": "dsh-vscode",
   "displayName": "DeepSeek Harness",
   "description": "Run DeepSeek Harness sessions from a VS Code sidebar.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "publisher": "lonelymoon87",
   "license": "MIT",
@@ -113,7 +113,7 @@
     "check": "pnpm run typecheck && pnpm run test && pnpm run build && pnpm run package"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-sdk-client": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-sdk-client": "0.1.1-rc.1",
     "@types/node": "^24.0.0",
     "@types/vscode": "^1.100.0",
     "@vitest/coverage-v8": "^4.1.8",

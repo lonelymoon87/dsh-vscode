@@ -1,13 +1,14 @@
 # DeepSeek Harness for VS Code
 
 [![CI](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/ci.yml)
+[![DSH 兼容性](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/dsh-compatibility.yml/badge.svg)](https://github.com/lonelymoon87/dsh-vscode/actions/workflows/dsh-compatibility.yml)
 [![Release](https://img.shields.io/github/v/release/lonelymoon87/dsh-vscode)](https://github.com/lonelymoon87/dsh-vscode/releases/latest)
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.100%2B-007ACC?logo=visualstudiocode)](https://code.visualstudio.com/)
 [![License](https://img.shields.io/github/license/lonelymoon87/dsh-vscode)](./LICENSE)
 
 [English](README.md) | 中文
 
-这是一个独立开发、仍处于预发布阶段的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) VS Code 客户端。扩展会在当前工作区启动官方 SDK runtime，把持久化会话日志流式投影到侧栏，展示工具执行过程，并用 VS Code 原生 diff 编辑器打开文件工具的结果。
+这是一个独立开发、仍处于预发布阶段的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) VS Code 客户端。0.1.2 内置官方 0.1.1-rc.1 SDK runtime，把持久化会话日志流式投影到侧栏，展示工具执行过程，并用 VS Code 原生 diff 编辑器打开文件工具的结果。
 
 本项目是社区项目，不由 DeepSeek 维护或背书。
 
@@ -40,8 +41,8 @@
 下载并安装已经验证的 macOS arm64 VSIX。
 
 ```sh
-curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.1/dsh-vscode-darwin-arm64-0.1.1.vsix
-code --install-extension dsh-vscode-darwin-arm64-0.1.1.vsix
+curl -fLO https://github.com/lonelymoon87/dsh-vscode/releases/download/v0.1.2/dsh-vscode-darwin-arm64-0.1.2.vsix
+code --install-extension dsh-vscode-darwin-arm64-0.1.2.vsix
 ```
 
 首个版本只提供经过验证的 macOS arm64 构建，其他平台尚未提供。
@@ -51,7 +52,7 @@ code --install-extension dsh-vscode-darwin-arm64-0.1.1.vsix
 ```sh
 pnpm install
 pnpm run check
-code --install-extension dsh-vscode-*-0.1.1.vsix
+code --install-extension dsh-vscode-*-0.1.2.vsix
 ```
 
 打开 Activity Bar 中的 **DeepSeek Harness** 视图并输入提示词。也可以用 `Cmd+Enter` 或 `Ctrl+Enter` 发送。
@@ -77,7 +78,7 @@ code --install-extension dsh-vscode-*-0.1.1.vsix
 
 ## 已知限制
 
-- rc.6 SDK 协议尚未提供中途取消、审批 UI、会话列表和会话恢复。
+- 0.1.1-rc.1 SDK 协议尚未提供中途取消、审批 UI、会话列表和会话恢复。
 - 同一时间只展示一个根会话和一个工作区文件夹，子 agent 通知不会混入根会话记录。
 - Markdown、图片附件和非 diff 的结构化工具展示目前会退化为纯文本。
 - VS Marketplace 发布和签名发行仍待完成；GitHub Release 中的 VSIX 是未签名的社区构建。
@@ -92,5 +93,5 @@ code --install-extension dsh-vscode-*-0.1.1.vsix
 
 - `pnpm run check` 覆盖类型检查、单元测试、生产构建和 VSIX 打包；
 - CI 在 Node 22.19 与 Node 24 上运行；
-- v0.1.1 VSIX 已装入全新的官方 VS Code profile，并完成真实模型回复、工具卡片和 token 用量投影；
+- 内置的 0.1.1-rc.1 runtime 已完成真实 SDK initialize 与 shutdown 握手；v0.1.2 在加入多平台发布自动化前仍只提供 macOS arm64 构建；
 - bug 与兼容性问题统一进入 [GitHub Issues](https://github.com/lonelymoon87/dsh-vscode/issues)。
